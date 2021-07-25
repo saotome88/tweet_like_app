@@ -1,2 +1,11 @@
 <%# _tweets.html.erbの呼び出し。@tweetsを渡す %>
 <%= render partial: 'tweets/tweets', collection: @tweets, as: :tweet %>
+
+<%# tweet表示 %>
+<div class="contents row">
+  <% @tweets.each do |tweet| %>
+    <div class="content_post">
+      <p><%= tweet.text %></p>
+    </div>
+  <% end %>
+</div>
