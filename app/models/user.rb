@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :tweets, dependent: :destroy
-  # ユーザーを消したらユーザーの持つlikesも消える
-#  has_many :likes, dependent: :destroy
-#  has_many :like_tweets, through: :likes, source: :tweet
+  has_many :likes, dependent: :destroy
+  # ユーザーがどの投稿に「いいねをした」かを取得する
+  has_many :liked_tweets, through: :likes, source: :tweet
 end
