@@ -1,6 +1,7 @@
 class Like < ApplicationRecord
-  # counter_cacheとは、リレーションされているlikeの数の値をリレーション先のlikes_countに代入するという意味
-  # likes_countはTweetモデルのカラムに追加しておく
   belongs_to :tweet
   belongs_to :user
+
+  #バリデーションで一つの投稿に一人一回だけいいねができる。
+  validates_uniquness_of :post_id, scope: :user_id
 end
