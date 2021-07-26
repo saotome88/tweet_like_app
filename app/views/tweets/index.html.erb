@@ -9,6 +9,8 @@
   <% @tweets.each do |tweet| %>
     <a href="/users/<%= tweet.user.id %>"><%= tweet.user.email %></a>
     <p><a href="/tweets/<%= tweet.id %>"><%= tweet.text %></a></p>
+    <%# tweetの持ついいねの数を表示させる %>
+    (<%= tweet.liked_users.count %>)
   <% end %>
 
 <% else %>
