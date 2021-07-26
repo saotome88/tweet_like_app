@@ -16,5 +16,6 @@ class LikesController < ApplicationController
   def set_variables
     @tweet = Tweet.find(params[:tweet_id])
     @id_name = "#like-link-#{@tweet.id}"
+    @id_heart = "#heart-#{@tweet.id}"
   end
 end

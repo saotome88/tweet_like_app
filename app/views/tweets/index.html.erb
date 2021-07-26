@@ -1,11 +1,17 @@
-<%# _tweets.html.erbの呼び出し。@tweetsを渡す %>
-<%= render partial: 'tweets/tweets', collection: @tweets, as: :tweet %>
-
-<%# tweet表示 %>
-<div class="contents row">
+<% if user_signed_in? %>
+  <h2>投稿する</h2>
+    <%= form_for @tweet do |f| %>
+      <%= f.text_field :text %>
+      <%= f.submit %>
+    <% end %>
+    <hr>
+  <h2>投稿一覧</h2>
   <% @tweets.each do |tweet| %>
-    <div class="content_post">
-      <p><%= tweet.text %></p>
-    </div>
+    <a href="/users/<%= tweet.user.id %>"><%= tweet.user.email %></a>
+    <p><a href="/tweets/<%= tweet.id %>"><%= tweet.text %></a></p>
   <% end %>
-</div>
+
+<% else %>
+  <%= link_to "ユーザー登録", new_user_registration_path %>
+  <%= link_to "ログイン", new_user_session_path %>
+<% end %>
