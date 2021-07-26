@@ -11,6 +11,6 @@ class User < ApplicationRecord
 
   # ユーザーがすでにいいねをしているかどうかの判定をする。
   def already_liked?(tweet)
-    self.likes.ecists?(tweet_id: tweet.id)
+    self.likes.exists?(tweet_id: tweet.id)
   end
 end
