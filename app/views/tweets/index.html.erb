@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+  <h2>投稿する</h2>
+    <%= form_for @tweet do |f| %>
+      <%= f.text_field :text %>
+      <%= f.submit %>
+    <% end %>
+    <hr>
+  <h2>投稿一覧</h2>
+  <% @tweets.each do |tweet| %>
+    <a href="/users/<%= tweet.user.id %>"><%= tweet.user.nickname %>さんのtweet</a>
+    <p><a href="/tweets/<%= tweet.id %>"><%= tweet.text %></a>(いいね：<%= tweet.liked_users.count %>)</p>
+    <%# tweetの持ついいねの数を表示させた %>
+  <% end %>
+
+<% else %>
+  <%= link_to "ユーザー登録", new_user_registration_path %>
+  <%= link_to "ログイン", new_user_session_path %>
+<% end %>
