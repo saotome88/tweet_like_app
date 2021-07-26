@@ -1,21 +1,15 @@
 class LikesController < ApplicationController
-  before_action :set_variables
-
-  def like
-    like = current_user.likes.new(tweet_id: @tweet.id)
-    like.save
+  def create
+    @like = current_user.likes.crete(post_id: params[:post_id])
+    #直前のぺージにリダイレクトする。いいねを押したら、トップページをリダイレクトして反映させている
+    redirect_back(fallback_location: root_path)
   end
 
-  def unlike
-    like = current_user.likes.find_by(tweet_id: @tweet.id)
-    like.destroy
-  end
+  def destroy
+    # findメソッドはidを引数に取る。find_byメソッドは属性を取り、複数条件を指定できる。
+    @like = Like.find_by(post_id: params[:post_id], user_id: current_user.id)
+    @like.destroy
+    #直前のぺージにリダイレクトする。いいねを消したら、トップページをリダイレクトして反映させている
+    redirect_back(fallback_location: root_path)
 
-  private
-
-  def set_variables
-    @tweet = Tweet.find(params[:tweet_id])
-    @id_name = "#like-link-#{@tweet.id}"
-    @id_heart = "#heart-#{@tweet.id}"
-  end
 end
