@@ -8,4 +8,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   # ユーザーがどの投稿に「いいねをした」かを取得する
   has_many :liked_tweets, through: :likes, source: :tweet
+
+  # ユーザーがすでにいいねをしているかどうかの判定をする。
+  def already_liked?(tweet)
+    self.likes.ecists?(post_id: post.id)
+  end
 end
